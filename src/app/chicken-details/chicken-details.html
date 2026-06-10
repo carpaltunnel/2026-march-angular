@@ -1,4 +1,17 @@
-<p>
-  {{ welcomeMessage() }}
-  chicken-details works!
-</p>
+<div class="chicken-details container">
+  <img class="chicken-picture" src="/ui/images/unknown.jpg">
+  <div class="text-details text-center">
+    <h3>{{ currentChicken.name }} Details : </h3>
+    <div><span>ID : </span> {{ currentChicken.id }}</div>
+    <div><span>Breed : </span> {{ currentChicken.breed }}</div>
+    <div><span>Weight : </span> {{ currentChicken.weight }}</div>
+    <div><span>Color : </span> {{ currentChicken.color }}</div>
+
+    <div class="mt-3">
+      <!-- TODO: Add EDIT route -->
+      <a class="btn btn-success">Edit</a>
+      <!-- TODO: Add DELETE action -->
+      <button class="btn btn-danger ms-5">Delete</button>
+    </div>
+  </div>
+</div>
