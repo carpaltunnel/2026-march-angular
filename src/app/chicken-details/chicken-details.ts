@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Chicken } from '../types/chicken.js';
 import { ChickensService } from '../chickens.service.js';
 
@@ -10,6 +10,7 @@ import { ChickensService } from '../chickens.service.js';
   styleUrl: './chicken-details.css',
 })
 export class ChickenDetails {
+  router: Router = inject(Router);
   route: ActivatedRoute = inject(ActivatedRoute);
   chickensService: ChickensService = inject(ChickensService);
   chickenId: string;
@@ -20,6 +21,8 @@ export class ChickenDetails {
     this.currentChicken = this.chickensService.getChickenById(this.chickenId);
   }
 
-  
-
+  deleteChicken() {
+    this.chickensService.deleteChicken(this.chickenId);
+    this.router.navigate(['']);
+  }
 }
