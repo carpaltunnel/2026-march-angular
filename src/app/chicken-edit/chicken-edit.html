@@ -1,0 +1,24 @@
+<div class="chicken-details container">
+  <img class="chicken-picture" src="{{currentChicken.imageUrl || '/ui/images/unknown.jpg'}}">
+
+  <div class="text-details">
+    <!-- TODO: WIRE UP FORM GROUP-->
+    <form>
+      <label for="name">Name : </label>
+      <input id="name" class="form-control" formControlName="name" type="text">
+
+      <label for="breed" class="d-inline">Breed : </label>
+      <input id="breed" class="form-control" formControlName="breed" type="text">
+
+      <label for="color">Color : </label>
+      <input id="color" class="form-control" formControlName="color" type="text">
+
+      <label for="weight">Weight : </label>
+      <input id="weight" class="form-control" formControlName="weight" type="number">
+    </form>
+
+    <div class="text-center mt-3">
+      <button class="btn btn-primary" (click)="saveChicken()">Save</button>
+    </div>
+  </div>
+</div>
