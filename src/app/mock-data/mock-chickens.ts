@@ -7,13 +7,15 @@ export const CHICKENS: Chicken[] = [
     breed: 'Buff Orpington',
     weight: 3.1,
     color: 'orange',
+    imageUrl: '/chickens/chipotle.jpg'
   },
   {
     id: '16964139-a743-429f-a915-7b25748987af',
     name: 'Mack',
     breed: 'White Leghorn',
     weight: 2,
-    color: 'white'
+    color: 'white',
+    imageUrl: '/chickens/mack.jpg'
   },
   {
     id: 'f3b7ea82-bb02-4978-b3c5-22b0cf9d09f6',
@@ -27,7 +29,8 @@ export const CHICKENS: Chicken[] = [
     name: 'Mango',
     breed: 'Speckled Sussex',
     weight: 2.7,
-    color: 'Brown'
+    color: 'Brown',
+    imageUrl: '/chickens/mango.jpg'
   },
   {
     id: 'd8d3ace8-de75-48f4-b8ee-b778bc264e68',
@@ -38,10 +41,11 @@ export const CHICKENS: Chicken[] = [
   },
   {
     id: '47829e91-f18f-4447-b905-a76bdbb1694c',
-    name: 'Steve',
-    breed: 'Buff Orpington',
-    weight: 2.5,
-    color: 'Orange'
+    name: 'EVOO',
+    breed: 'Rhode Island Red',
+    weight: 3.1,
+    color: 'red',
+    imageUrl: '/chickens/red-chicken.jpg'
   },
 ];
 
