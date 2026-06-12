@@ -1,5 +1,5 @@
 <div class="chicken-details container">
-  <img class="chicken-picture" src="/ui/images/unknown.jpg">
+  <img class="chicken-picture" src="{{currentChicken.imageUrl || '/ui/images/unknown.jpg'}}">
   <div class="text-details text-center">
     <h3>{{ currentChicken.name }} Details : </h3>
     <div><span>ID : </span> {{ currentChicken.id }}</div>
