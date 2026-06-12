@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Chicken } from '../types/chicken.js';
-import { CHICKEN } from '../mock-data/mock-chicken.js';
-import { CHICKENS } from '../mock-data/mock-chickens.js';
+import { ChickensService } from '../chickens.service.js';
 
 @Component({
   selector: 'app-chicken-details',
@@ -12,12 +11,13 @@ import { CHICKENS } from '../mock-data/mock-chickens.js';
 })
 export class ChickenDetails {
   route: ActivatedRoute = inject(ActivatedRoute);
+  chickensService: ChickensService = inject(ChickensService);
   chickenId: string;
   protected currentChicken: Chicken;
 
   constructor() {
     this.chickenId = this.route.snapshot.params['id'];
-    this.currentChicken = CHICKENS.find(c => c.id === this.chickenId) || CHICKEN;
+    this.currentChicken = this.chickensService.getChickenById(this.chickenId);
   }
 
   
