@@ -8,8 +8,7 @@
     <div><span>Color : </span> {{ currentChicken.color }}</div>
 
     <div class="mt-3">
-      <!-- TODO: Add EDIT route -->
-      <a class="btn btn-success">Edit</a>
+      <a class="btn btn-success" [routerLink]="['/chickens/edit', currentChicken.id]">Edit</a>
       <button class="btn btn-danger ms-5" (click)="deleteChicken()">Delete</button>
     </div>
   </div>

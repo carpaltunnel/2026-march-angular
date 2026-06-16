@@ -2,8 +2,7 @@
   <img class="chicken-picture" src="{{currentChicken.imageUrl || '/ui/images/unknown.jpg'}}">
 
   <div class="text-details">
-    <!-- TODO: WIRE UP FORM GROUP-->
-    <form>
+    <form [formGroup]="chickenForm">
       <label for="name">Name : </label>
       <input id="name" class="form-control" formControlName="name" type="text">
 

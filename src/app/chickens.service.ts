@@ -31,4 +31,12 @@ export class ChickensService {
       console.log(`Deleted chicken with id = ${id}`);
     }
   }
+
+  updateChicken(id: string, updatedChicken: Chicken): void {
+    const idx = this.chickens.findIndex(c => c.id === id);
+
+    if (idx >= 0) {
+      this.chickens[idx] = updatedChicken;
+    }
+  }
 }
