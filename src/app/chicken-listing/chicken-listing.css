@@ -1,0 +1,5 @@
+.inline-float-right {
+  display: inline;
+  float: right;
+  margin-right: 4em;
+}
