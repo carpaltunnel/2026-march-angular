@@ -3,8 +3,8 @@
 </div>
 <br>
 
-Total of {{ chickens.length }} chickens : <br>
+Total of {{ chickens().length }} chickens : <br>
 
-@for(chicken of chickens; track $index) {
+@for(chicken of chickens(); track $index) {
   <app-chicken-overview [currentChicken]="chicken"></app-chicken-overview>
 }

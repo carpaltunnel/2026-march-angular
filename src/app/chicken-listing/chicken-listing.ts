@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Chicken } from '../types/chicken.js';
 import { CHICKENS } from '../mock-data/mock-chickens.js';
@@ -14,16 +14,12 @@ import { ChickensService } from '../chickens.service.js';
 })
 export class ChickenListing {
   chickensService: ChickensService = inject(ChickensService);
-  chickens: Chicken[] = [];
-  
+  chickens = signal<Chicken[]>([]);
+
   constructor() {
     this.chickensService.getChickens()
       .then((chickensData) => {
-        this.chickens = chickensData;
+        this.chickens.set(chickensData);
       });
-  }
-
-  async ngOnInit() {
-    console.log('ngOnInit');
   }
 }
