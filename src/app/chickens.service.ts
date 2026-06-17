@@ -4,6 +4,7 @@ import { CHICKENS } from './mock-data/mock-chickens.js';
 
 @Service()
 export class ChickensService {
+  baseUrl = '/api/v1/chickens';
   chickens: Chicken[] = CHICKENS;
   emptyChicken: Chicken = {
     id: '',
@@ -13,12 +14,13 @@ export class ChickensService {
     color: '',
   };
 
-  getChickenById(id: string): Chicken {
-    return this.chickens.find(c => c.id === id) || this.emptyChicken;
+  async getChickens(): Promise<Chicken[]> {
+    const data = await fetch(`${this.baseUrl}`);
+    return await data.json();
   }
 
-  getChickens(): Chicken[] {
-    return this.chickens;
+  getChickenById(id: string): Chicken {
+    return this.chickens.find(c => c.id === id) || this.emptyChicken;
   }
 
   deleteChicken(id: string): void {

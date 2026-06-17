@@ -14,9 +14,16 @@ import { ChickensService } from '../chickens.service.js';
 })
 export class ChickenListing {
   chickensService: ChickensService = inject(ChickensService);
-  chickens: Chicken[];
+  chickens: Chicken[] = [];
   
   constructor() {
-    this.chickens = this.chickensService.getChickens();
+    this.chickensService.getChickens()
+      .then((chickensData) => {
+        this.chickens = chickensData;
+      });
+  }
+
+  async ngOnInit() {
+    console.log('ngOnInit');
   }
 }
