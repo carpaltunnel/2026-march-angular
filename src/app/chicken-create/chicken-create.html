@@ -1,0 +1,25 @@
+<div class="chicken-details container">
+  <div class="text-details">
+    <form [formGroup]="newChickenForm">
+      <label for="name">Name : </label>
+      <input id="name" class="form-control" formControlName="name" type="text" required>
+
+      <label for="breed" class="d-inline">Breed : </label>
+      <input id="breed" class="form-control" formControlName="breed" type="text" required>
+
+      <label for="color">Color : </label>
+      <input id="color" class="form-control" formControlName="color" type="text" required>
+
+      <label for="weight">Weight : </label>
+      <input id="weight" class="form-control" formControlName="weight" type="number" required>
+
+      <!-- TODO: Allow image uploads on UI and API -->
+      <label for="image">Image URL : </label>
+      <input id="image" class="form-control" formControlName="imageUrl" type="url">
+    </form>
+
+    <div class="text-center mt-3">
+      <button class="btn btn-primary" (click)="createChicken()">Create</button>
+    </div>
+  </div>
+</div>
