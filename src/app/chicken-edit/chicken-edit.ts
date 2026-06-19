@@ -3,6 +3,7 @@ import { Chicken } from '../types/chicken.js';
 import { ChickensService } from '../chickens.service.js';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CONSTANTS } from '../constants.js';
 
 @Component({
   selector: 'app-chicken-edit',
@@ -15,13 +16,7 @@ export class ChickenEdit {
   router: Router = inject(Router);
   route: ActivatedRoute = inject(ActivatedRoute);
   // TODO: Replace with emptyChicken constant
-  currentChicken = signal<Chicken>({
-    id: '',
-    name: '',
-    breed: '',
-    color: '',
-    weight: 0,
-  });
+  currentChicken = signal<Chicken>(CONSTANTS.EMPTY_CHICKEN);
   chickenId: string;
   //
   // Marked as !optional/nullable! to make typescript happy
