@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Chicken } from '../types/chicken.js';
 import { ChickensService } from '../chickens.service.js';
@@ -14,11 +14,21 @@ export class ChickenDetails {
   route: ActivatedRoute = inject(ActivatedRoute);
   chickensService: ChickensService = inject(ChickensService);
   chickenId: string;
-  protected currentChicken: Chicken;
+  // TODO: Replace with emptyChicken constant
+  currentChicken = signal<Chicken>({
+    id: '',
+    name: '',
+    breed: '',
+    color: '',
+    weight: 0,
+  });
 
   constructor() {
     this.chickenId = this.route.snapshot.params['id'];
-    this.currentChicken = this.chickensService.getChickenById(this.chickenId);
+    this.chickensService.getChickenById(this.chickenId)
+      .then((chickenData) => {
+        this.currentChicken.set(chickenData);
+      });
   }
 
   async deleteChicken() {

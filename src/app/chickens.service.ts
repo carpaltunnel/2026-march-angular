@@ -17,12 +17,13 @@ export class ChickensService {
   };
 
   async getChickens(): Promise<Chicken[]> {
-    const data = await fetch(`${this.baseUrl}`);
+    const data = await fetch(this.baseUrl);
     return await data.json();
   }
 
-  getChickenById(id: string): Chicken {
-    return this.chickens.find(c => c.id === id) || this.emptyChicken;
+  async getChickenById(id: string): Promise<Chicken> {
+    const data = await fetch(`${this.baseUrl}/${id}`);
+    return await data.json();
   }
 
   async deleteChicken(id: string): Promise<void> {
