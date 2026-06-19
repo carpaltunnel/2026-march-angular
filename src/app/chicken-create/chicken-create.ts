@@ -26,13 +26,11 @@ export class ChickenCreate {
     });
   }
 
-  createChicken(): void {
+  async createChicken(): Promise<void> {
     const newChicken: Chicken = {
-      // TODO: Remove this : 
-      id: Math.floor(Math.random() * 10_000_000).toString(),
       ...this.newChickenForm.value
     };
-    this.chickenService.createChicken(newChicken);
+    await this.chickenService.createChicken(newChicken);
     
     // Redirect to main page / chicken listing
     this.router.navigate(['']);

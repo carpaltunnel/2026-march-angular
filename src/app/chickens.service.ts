@@ -1,9 +1,11 @@
-import { Service } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Chicken } from './types/chicken.js';
 import { CHICKENS } from './mock-data/mock-chickens.js';
+import { HttpClient } from '@angular/common/http';
 
 @Service()
 export class ChickensService {
+  private http = inject(HttpClient);
   baseUrl = '/api/v1/chickens';
   chickens: Chicken[] = CHICKENS;
   emptyChicken: Chicken = {
@@ -26,7 +28,7 @@ export class ChickensService {
   deleteChicken(id: string): void {
     const previousSize = this.chickens.length;
     this.chickens = this.chickens.filter(c => c.id !== id);
-    
+
     if (this.chickens.length === previousSize) {
       console.log(`Failed to delete id : ${id}`);
     } else {
@@ -42,7 +44,16 @@ export class ChickensService {
     }
   }
 
-  createChicken(newChicken: Chicken): void {
-    this.chickens.push(newChicken);
+  async createChicken(newChicken: Chicken): Promise<void> {
+    // New Promise, to prevent race condition
+    return new Promise((resolve) => {
+      this.http.post(this.baseUrl, newChicken, {
+        keepalive: true,
+      })
+        .subscribe((data) => {
+          console.log(data);
+          resolve();
+        });
+    });
   }
 }
