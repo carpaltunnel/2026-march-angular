@@ -21,8 +21,8 @@ export class ChickenDetails {
     this.currentChicken = this.chickensService.getChickenById(this.chickenId);
   }
 
-  deleteChicken() {
-    this.chickensService.deleteChicken(this.chickenId);
+  async deleteChicken() {
+    await this.chickensService.deleteChicken(this.chickenId);
     this.router.navigate(['']);
   }
 }

@@ -25,15 +25,14 @@ export class ChickensService {
     return this.chickens.find(c => c.id === id) || this.emptyChicken;
   }
 
-  deleteChicken(id: string): void {
-    const previousSize = this.chickens.length;
-    this.chickens = this.chickens.filter(c => c.id !== id);
-
-    if (this.chickens.length === previousSize) {
-      console.log(`Failed to delete id : ${id}`);
-    } else {
-      console.log(`Deleted chicken with id = ${id}`);
-    }
+  async deleteChicken(id: string): Promise<void> {
+    // New Promise, to prevent race condition
+    return new Promise((resolve) => {
+      this.http.delete(`${this.baseUrl}/${id}`)
+        .subscribe(() => {
+          resolve();
+        });
+    });
   }
 
   updateChicken(id: string, updatedChicken: Chicken): void {
@@ -50,8 +49,7 @@ export class ChickensService {
       this.http.post(this.baseUrl, newChicken, {
         keepalive: true,
       })
-        .subscribe((data) => {
-          console.log(data);
+        .subscribe(() => {
           resolve();
         });
     });
