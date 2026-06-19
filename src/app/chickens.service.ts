@@ -8,13 +8,6 @@ export class ChickensService {
   private http = inject(HttpClient);
   baseUrl = '/api/v1/chickens';
   chickens: Chicken[] = CHICKENS;
-  emptyChicken: Chicken = {
-    id: '',
-    name: '',
-    weight: 0,
-    breed: '',
-    color: '',
-  };
 
   async getChickens(): Promise<Chicken[]> {
     const data = await fetch(this.baseUrl);
@@ -26,7 +19,7 @@ export class ChickensService {
     return await data.json();
   }
 
-  async deleteChicken(id: string): Promise<void> {
+  deleteChicken(id: string): Promise<void> {
     // New Promise, to prevent race condition
     return new Promise((resolve) => {
       this.http.delete(`${this.baseUrl}/${id}`)
@@ -36,15 +29,19 @@ export class ChickensService {
     });
   }
 
-  updateChicken(id: string, updatedChicken: Chicken): void {
-    const idx = this.chickens.findIndex(c => c.id === id);
-
-    if (idx >= 0) {
-      this.chickens[idx] = updatedChicken;
-    }
+  updateChicken(id: string, updatedChicken: Chicken): Promise<void> {
+    // New Promise, to prevent race condition
+    return new Promise((resolve) => {
+      this.http.patch(`${this.baseUrl}/${id}`, updatedChicken, {
+        keepalive: true,
+      })
+        .subscribe(() => {
+          resolve();
+        });
+    });
   }
 
-  async createChicken(newChicken: Chicken): Promise<void> {
+  createChicken(newChicken: Chicken): Promise<void> {
     // New Promise, to prevent race condition
     return new Promise((resolve) => {
       this.http.post(this.baseUrl, newChicken, {

@@ -15,7 +15,6 @@ export class ChickenEdit {
   chickensService: ChickensService = inject(ChickensService);
   router: Router = inject(Router);
   route: ActivatedRoute = inject(ActivatedRoute);
-  // TODO: Replace with emptyChicken constant
   currentChicken = signal<Chicken>(CONSTANTS.EMPTY_CHICKEN);
   chickenId: string;
   //
@@ -38,13 +37,13 @@ export class ChickenEdit {
       });
   }
 
-  saveChicken(): void {
+  async saveChicken(): Promise<void> {
     const updateChicken: Chicken = {
       id: this.currentChicken().id,
       imageUrl: this.currentChicken().imageUrl,
       ...this.chickenForm?.value
     };
-    this.chickensService.updateChicken(this.chickenId, updateChicken);
+    await this.chickensService.updateChicken(this.chickenId, updateChicken);
 
     // Redirect to main page / chicken listing
     this.router.navigate(['']);
