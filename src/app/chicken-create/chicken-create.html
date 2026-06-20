@@ -13,9 +13,8 @@
       <label for="weight">Weight : </label>
       <input id="weight" class="form-control" formControlName="weight" type="number" required>
 
-      <!-- TODO: Allow image uploads on UI and API -->
-      <label for="image">Image URL : </label>
-      <input id="image" class="form-control" formControlName="imageUrl" type="url">
+      <label for="image">Upload Image : </label>
+      <input id="image" class="form-control" formControlName="imageUrl" type="file" (change)="onFileSelected($event)">
     </form>
 
     <div class="text-center mt-3">

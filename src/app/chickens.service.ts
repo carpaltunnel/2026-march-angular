@@ -44,9 +44,11 @@ export class ChickensService {
   createChicken(newChicken: Chicken): Promise<void> {
     // New Promise, to prevent race condition
     return new Promise((resolve) => {
-      // TODO: Multer ONLY accepts multipart form data
-      // TODO: Multer ONLY accepts multipart form data
-      // TODO: Multer ONLY accepts multipart form data
+      const formData = new FormData();
+      Object.keys(newChicken).forEach((prop) => {
+        formData.append(prop, newChicken[prop as keyof Chicken]);
+      });
+
       // TODO: Multer ONLY accepts multipart form data
       this.http.post(this.baseUrl, newChicken, {
         keepalive: true,

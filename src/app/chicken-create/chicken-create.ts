@@ -35,4 +35,14 @@ export class ChickenCreate {
     // Redirect to main page / chicken listing
     this.router.navigate(['']);
   }
+
+  onFileSelected(event: Event){
+    if (event?.target) {
+      const element = event.target as HTMLInputElement;
+      if (element?.files) {
+        const file = element.files[0];
+        this.newChickenForm.patchValue({ chickenImage: file });
+      }
+    }
+  }
 }
