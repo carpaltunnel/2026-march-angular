@@ -46,11 +46,17 @@ export class ChickensService {
     return new Promise((resolve) => {
       const formData = new FormData();
       Object.keys(newChicken).forEach((prop) => {
-        formData.append(prop, newChicken[prop as keyof Chicken]);
+        const value = newChicken[prop as keyof Chicken];
+
+        if (value === undefined) {
+          return;
+        }
+
+        // TODO: weight should be a number
+        formData.append(prop, value instanceof Blob ? value : String(value));
       });
 
-      // TODO: Multer ONLY accepts multipart form data
-      this.http.post(this.baseUrl, newChicken, {
+      this.http.post(this.baseUrl, formData, {
         keepalive: true,
       })
         .subscribe(() => {

@@ -23,6 +23,7 @@ export class ChickenCreate {
       color: new FormControl(''),
       weight: new FormControl(0),
       imageUrl: new FormControl(''),
+      chickenImage: new FormControl(null),
     });
   }
 

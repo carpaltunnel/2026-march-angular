@@ -5,4 +5,5 @@ export interface Chicken {
   weight: number;
   color: string;
   imageUrl?: string;
+  chickenImage?: File;
 }
